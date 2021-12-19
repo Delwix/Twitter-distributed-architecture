@@ -17,4 +17,10 @@ public class FallBackMethodController {
         return "TweetPost Service is taking longer than Expected." +
                 " Please try again later";
     }
+
+    @GetMapping("/fanoutServiceFallBack")
+    public String fanoutServiceFallBackMethod() {
+        return "Fanout Service is taking longer than Expected." +
+                " Please try again later";
+    }
 }
