@@ -25,6 +25,43 @@ spring:
               args:
                 name: TWEETPOST-SERVICE
                 fallbackuri: forward:/tweetPostServiceFallBack
+        - id: FANOUT-SERVICE
+            uri: lb://FANOUT-SERVICE
+            predicates:
+              - Path=/fanout/**
+            filters:
+              - name: CircuitBreaker
+                args:
+                  name: FANOUT-SERVICE
+                  fallbackuri: forward:/fanoutServiceFallBack
+        - id: MANAGETWEET-SERVICE
+            uri: lb://MANAGETWEET-SERVICE
+            predicates:
+              - Path=/managetweet/**
+            filters:
+              - name: CircuitBreaker
+                args:
+                  name: MANAGETWEET-SERVICE
+                  fallbackuri: forward:/managetweetServiceFallBack
+        - id: PREFERENCES-SERVICE
+            uri: lb://PREFERENCES-SERVICE
+            predicates:
+              - Path=/preferences/**
+            filters:
+              - name: CircuitBreaker
+                args:
+                  name: PREFERENCES-SERVICE
+                  fallbackuri: forward:/preferencesServiceFallBack
+        - id: SHARING-SERVICE
+            uri: lb://SHARING-SERVICE
+            predicates:
+              - Path=/share/**
+            filters:
+              - name: CircuitBreaker
+                args:
+                  name: SHARING-SERVICE
+                  fallbackuri: forward:/sharingServiceFallBack
+
 
 
 hystrix:
