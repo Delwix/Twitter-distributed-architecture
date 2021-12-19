@@ -1,1 +1,1 @@
-# Twitter-disctributed-architecture
+# Twitter-distributed-architecture
