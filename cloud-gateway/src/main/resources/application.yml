@@ -43,6 +43,16 @@ spring:
                 args:
                   name: MANAGETWEET-SERVICE
                   fallbackuri: forward:/managetweetServiceFallBack
+        - id: PREFERENCES-SERVICE
+            uri: lb://PREFERENCES-SERVICE
+            predicates:
+              - Path=/preferences/**
+            filters:
+              - name: CircuitBreaker
+                args:
+                  name: PREFERENCES-SERVICE
+                  fallbackuri: forward:/preferencesServiceFallBack
+
 
 
 hystrix:

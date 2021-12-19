@@ -29,4 +29,10 @@ public class FallBackMethodController {
         return "Manage Tweet Service is taking longer than Expected." +
                 " Please try again later";
     }
+
+    @GetMapping("/preferencesServiceFallBack")
+    public String preferencesServiceFallBackMethod() {
+        return "Preferences Tweet Service is taking longer than Expected." +
+                " Please try again later";
+    }
 }
