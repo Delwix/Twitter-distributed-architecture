@@ -1,0 +1,44 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/users/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: USER-SERVICE
+                fallbackuri: forward:/userServiceFallBack
+        - id: TWEETPOST-SERVICE
+          uri: lb://TWEETPOST-SERVICE
+          predicates:
+            - Path=/tweetpost/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: TWEETPOST-SERVICE
+                fallbackuri: forward:/tweetPostServiceFallBack
+
+
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
