@@ -34,6 +34,15 @@ spring:
                 args:
                   name: FANOUT-SERVICE
                   fallbackuri: forward:/fanoutServiceFallBack
+        - id: MANAGETWEET-SERVICE
+            uri: lb://MANAGETWEET-SERVICE
+            predicates:
+              - Path=/managetweet/**
+            filters:
+              - name: CircuitBreaker
+                args:
+                  name: MANAGETWEET-SERVICE
+                  fallbackuri: forward:/managetweetServiceFallBack
 
 
 hystrix:
