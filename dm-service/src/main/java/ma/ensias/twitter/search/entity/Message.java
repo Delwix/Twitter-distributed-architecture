@@ -5,8 +5,8 @@ import java.sql.Date;
 public class Message {
     private Long id;
     private String text;
-//    private User sender;
-//    private User receiver;
+    private String sender;
+    private String receiver;
     private Date sent;
 
     public Message() {
@@ -34,5 +34,21 @@ public class Message {
 
     public void setSent(Date sent) {
         this.sent = sent;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
 }
