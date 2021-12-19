@@ -35,4 +35,10 @@ public class FallBackMethodController {
         return "Preferences Tweet Service is taking longer than Expected." +
                 " Please try again later";
     }
+
+    @GetMapping("/sharingServiceFallBack")
+    public String sharingServiceFallBackMethod() {
+        return "Sharing Service is taking longer than Expected." +
+                " Please try again later";
+    }
 }

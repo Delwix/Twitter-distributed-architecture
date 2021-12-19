@@ -52,6 +52,15 @@ spring:
                 args:
                   name: PREFERENCES-SERVICE
                   fallbackuri: forward:/preferencesServiceFallBack
+        - id: SHARING-SERVICE
+            uri: lb://SHARING-SERVICE
+            predicates:
+              - Path=/share/**
+            filters:
+              - name: CircuitBreaker
+                args:
+                  name: SHARING-SERVICE
+                  fallbackuri: forward:/sharingServiceFallBack
 
 
 
