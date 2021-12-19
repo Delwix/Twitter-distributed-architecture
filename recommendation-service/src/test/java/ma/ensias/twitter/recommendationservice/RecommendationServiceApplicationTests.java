@@ -1,4 +1,4 @@
-package ma.ensias.service.recommendation.recommendationservice;
+package ma.ensias.twitter.recommendationservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
