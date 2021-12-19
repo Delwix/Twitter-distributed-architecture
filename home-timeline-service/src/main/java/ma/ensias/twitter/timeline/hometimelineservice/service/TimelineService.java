@@ -5,10 +5,7 @@ import ma.ensias.twitter.timeline.hometimelineservice.Repository.TimelineReposit
 import ma.ensias.twitter.timeline.hometimelineservice.Repository.TweetInfoRepository;
 import ma.ensias.twitter.timeline.hometimelineservice.Repository.TweetRepository;
 import ma.ensias.twitter.timeline.hometimelineservice.dto.ResponseFile;
-import ma.ensias.twitter.timeline.hometimelineservice.entity.Ad;
-import ma.ensias.twitter.timeline.hometimelineservice.entity.TimelineQueue;
-import ma.ensias.twitter.timeline.hometimelineservice.entity.Tweet;
-import ma.ensias.twitter.timeline.hometimelineservice.entity.TweetInfo;
+import ma.ensias.twitter.timeline.hometimelineservice.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -31,8 +28,8 @@ public class TimelineService {
     @Autowired
     private WebClient.Builder webClientBuilder;
 
-    private final String baseUrl = "http://ad-service/";
-
+    private final String adServiceUrl = "http://ad-service/";
+    private final String recommendationServiceUrl = "http://recommendation-service/";
     public ResponseFile getUserHomeTimeline(Long userId){
         //Loading ads
         List<Ad> listofAds = getAds(userId);
@@ -47,6 +44,19 @@ public class TimelineService {
             listOfTweets.add(tweet);
         }
 
+        Recommendation recommendation = getRecommendation(userId);
+
+        try{
+            for(Long u: recommendation.getListTweetIds()){
+                Tweet tweet1 = tweetRepository.findById(u).get();
+                listOfTweets.add(tweet1);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
         ResponseFile responseFile = new ResponseFile();
         responseFile.setAds(listofAds);
         responseFile.setTweets(listOfTweets);
@@ -54,7 +64,7 @@ public class TimelineService {
     }
 
     public List<Ad> getAds(Long userId){
-        Mono<Ad[]> response = webClientBuilder.baseUrl(baseUrl)
+        Mono<Ad[]> response = webClientBuilder.baseUrl(adServiceUrl)
                 .build()
                 .get()
                 .uri("ads/"+userId)
@@ -63,6 +73,18 @@ public class TimelineService {
                 .bodyToMono(Ad[].class).log();
         List<Ad> out = Arrays.asList(response.block());
         System.out.println(out.toString());
+        return out;
+    }
+
+    public Recommendation getRecommendation(Long userId){
+        Mono<Recommendation> response = webClientBuilder.baseUrl(recommendationServiceUrl)
+                .build()
+                .get()
+                .uri("recommendations/"+userId)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(Recommendation.class).log();
+        Recommendation out = response.block();
         return out;
     }
 

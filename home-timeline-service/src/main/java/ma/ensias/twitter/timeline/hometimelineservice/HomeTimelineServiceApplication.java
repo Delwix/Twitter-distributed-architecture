@@ -50,7 +50,11 @@ public class HomeTimelineServiceApplication implements CommandLineRunner {
 
 		Tweet tweet1 = new Tweet(1L, 1L, "This is my first tweet");
 		Tweet tweet2 = new Tweet(2L, 1L, "This is my Second Tweet =)");
+		Tweet tweet3 = new Tweet(3L, 16L, "Recommended tweet num 1");
+		Tweet tweet4 = new Tweet(4L, 18L, "Recommended tweet num 2");
 		tweetRepository.save(tweet1);
 		tweetRepository.save(tweet2);
+		tweetRepository.save(tweet3);
+		tweetRepository.save(tweet4);
 	}
 }
