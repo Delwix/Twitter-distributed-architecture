@@ -31,6 +31,7 @@ public class TweetPostController {
 
         int tweetId = (int) ((Math.random() * (20 - 1)) + 1);
         JSONObject response = new JSONObject();
+        response.put("Service", "Publish Tweet Service");
         response.put("tweetId", tweetId);
         response.put("text", tweetPost.getText());
         response.put("media", tweetPost.getMedia());
@@ -41,6 +42,7 @@ public class TweetPostController {
     public JSONObject retweetTweet(@RequestBody TweetPost tweetPost) {
         int tweetId = (int) ((Math.random() * (20 - 1)) + 1);
         JSONObject response = new JSONObject();
+        response.put("Service", "Retweet Tweet Service");
         response.put("tweetId", tweetId);
         response.put("text", tweetPost.getText());
         response.put("userId", tweetPost.getUserId());
@@ -51,6 +53,7 @@ public class TweetPostController {
     public JSONObject commentTweet(@RequestBody TweetPost tweetPost) {
         int tweetId = (int) ((Math.random() * (20 - 1)) + 1);
         JSONObject response = new JSONObject();
+        response.put("Service", "Comment Tweet Service");
         response.put("tweetId", tweetId);
         response.put("text", tweetPost.getText());
         response.put("media", tweetPost.getMedia());

@@ -29,6 +29,7 @@ public class PreferencesController {
     @PostMapping("/react")
     public JSONObject reactTweet(@RequestBody TweetPost tweetPost) {
         JSONObject response = new JSONObject();
+        response.put("Service", "React to Tweet Service");
         response.put("tweetId", tweetPost.getTweetId());
         response.put("userId", tweetPost.getUserId());
         return response;
