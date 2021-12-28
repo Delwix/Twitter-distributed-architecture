@@ -8,5 +8,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/RidaTazi/twitter-clone/tree/main/config-server
+          uri: https://github.com/RidaTazi/twitter-clone
           clone-on-start: true
