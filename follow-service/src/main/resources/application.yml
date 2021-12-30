@@ -1,2 +1,5 @@
-server:
-  port: 8001
+db.username: socialGraph
+db.password:
+db.url: jdbc:mysql://mysql-follow-management-containar:3306/follow_management?autoReconnect=true&useSSL=false
+db.driver: com.mysql.jdbc.Driver
+db.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
